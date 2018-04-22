@@ -1,5 +1,12 @@
+try:
+	import http.cookiejar as cookielib
+except ImportError:
+	import cookielib
+
+import urllib, json, re, datetime, sys
 import pandas as pd
 import numpy as np
+from pyquery import PyQuery
 
 class TweetCriteria:
 	def __init__(self):
@@ -39,17 +46,6 @@ class Tweet:
 		pass
 
 
-try:
-	import http.cookiejar as cookielib
-except ImportError:
-	import cookielib
-
-import urllib, json, re, datetime, sys
-import pandas as pd
-import numpy as np
-from pyquery import PyQuery
-
-
 class TweetManager:
 	def __init__(self):
 		pass
@@ -59,9 +55,8 @@ class TweetManager:
 	              receiveBuffer=None,
 	              bufferLength=100,
 	              proxy=None):
-		"""Description"""
+		"""Return the list of tweets retrieved by using an instance of TwitterCriteria"""
 		refreshCursor = ''
-
 		results = []
 		resultsAux = []
 		cookieJar = cookielib.CookieJar()
@@ -150,7 +145,7 @@ class TweetManager:
 
 	@staticmethod
 	def getJsonReponse(tweetCriteria, refreshCursor, cookieJar, proxy):
-		"""Description"""
+		"""Actually obtains the tweets and returns an object that can be read"""
 		url = "https://twitter.com/i/search/timeline?f=tweets&q=%s&src=typd&max_position=%s"
 
 		urlGetData = ''
@@ -212,6 +207,7 @@ class TweetObtain:
 	def __init__(self):
 		pass
 	def TweetObtain_function(self,videogame):
+		"""Returns a clean dataframe for analysis using TweetCriteria and TweetManager"""
 		print(videogame)
 		tweet_date = []
 		tweet_text = []
