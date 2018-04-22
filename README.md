@@ -21,47 +21,46 @@ pip install -r requirements.txt
 * geo (str)  
 
 **TweetManager:** A manager class to help getting tweets in Tweet's model  
-getTweets: Return the list of tweets retrieved by using an instance of TwitterCriteria  
-getJsonReponse: Actually obtains the tweets and returns an object that can be read    
-TweetObtain_function: Returns a clean dataframe for analysis using TweetCriteria and TweetManager 
+* getTweets: Return the list of tweets retrieved by using an instance of TwitterCriteria  
+* getJsonReponse: Actually obtains the tweets and returns an object that can be read    
  
 **TwitterCriteria:** A collection of search parameters to be used together with TweetManager   
-setUsername (str): An optional specific username from a twitter account. Without "@" 
-setSince (str. "yyyy-mm-dd"): A lower bound date to restrict search  
-setUntil (str. "yyyy-mm-dd"): An upper bound date to restrist search  
-setQuerySearch (str): A query text to be matched   
-setTopTweets (bool): If True only the Top Tweets will be retrieved    
-setNear(str): A reference location area from where tweets were generated   
-setWithin (str): A distance radius from "near" location (e.g. 15mi)  
-setMaxTweets (int): The maximum number of tweets to be retrieved. If this number is unsetted or lower than 1 all possible tweets will be retrieved.    
+* setUsername (str): An optional specific username from a twitter account. Without "@" 
+* setSince (str. "yyyy-mm-dd"): A lower bound date to restrict search  
+* setUntil (str. "yyyy-mm-dd"): An upper bound date to restrist search  
+* setQuerySearch (str): A query text to be matched   
+* setTopTweets (bool): If True only the Top Tweets will be retrieved    
+* setNear(str): A reference location area from where tweets were generated   
+* setWithin (str): A distance radius from "near" location (e.g. 15mi)  
+* setMaxTweets (int): The maximum number of tweets to be retrieved. If this number is unsetted or lower than 1 all possible tweets will be retrieved.    
 
 **TweetObtain:** Returns a clean dataframe for analysis using TweetCriteria and TweetManager
-Exporter: Export all tweets to a csv file named "tweets.csv".  
+* TweetObtain_function: Returns a clean dataframe for analysis using TweetCriteria and TweetManager 
 
 ## Simple examples of python usage
 
-- Get tweets by username
+* Get tweets by username
 ``` python
 	tweetCriteria = Tool.TweetCriteria().setUsername('barackobama').setMaxTweets(1)
 	tweet = Tool.TweetManager.getTweets(tweetCriteria)[0]
 	tweets = pd.read_csv('tweets.csv')
 	print(tweets)
 ```    
-- Get tweets by query search
+* Get tweets by query search
 ``` python
 	tweetCriteria = Tool.TweetCriteria().setQuerySearch('europe refugees').setSince("2015-05-01").setUntil("2015-09-30").setMaxTweets(1)
 	tweet = Tool.TweetManager.getTweets(tweetCriteria)[0]
 	tweets = pd.read_csv('tweets.csv')
 	print(tweets)
 ```    
-- Get tweets by username and bound dates
+* Get tweets by username and bound dates
 ``` python
 	tweetCriteria = Tool.TweetCriteria().setUsername("barackobama").setSince("2015-09-10").setUntil("2015-09-12").setMaxTweets(1)
 	tweet = Tool.TweetManager.getTweets(tweetCriteria)[0]
 	tweets = pd.read_csv('tweets.csv')
 	print(tweets)
 ```
-- Get the last 10 top tweets by username
+* Get the last 10 top tweets by username
 ``` python
 	tweetCriteria = Tool.TweetCriteria().setUsername("barackobama").setTopTweets(True).setMaxTweets(10)
 	# first one
